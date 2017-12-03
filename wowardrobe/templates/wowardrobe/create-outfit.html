@@ -1,0 +1,265 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}WoWardrobe - Create Outfit{% endblock %}
+{% block head %}
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/d3pie.min.js"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/mywardrobe.js"></script>
+<script src="/static/wowardrobe/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/create-outfit.js"></script>
+{% endblock %}
+{% block content %}
+<div class="container">
+   <div class="bg-faded p-4 my-4">
+      <hr class="divider">
+      <h2 class="text-center text-lg text-uppercase my-0">
+         <strong>Create Outfit</strong>
+      </h2>
+      <hr class="divider">
+      {% if messages %}
+      <div class="messages alert alert-success">
+         {% for message in messages %}
+         <a href="#" class="close" data-dismiss="alert">&times;</a>
+         <strong{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>
+         {% endfor %}
+      </div>
+      {% endif %}
+      <div class = "row">
+         <div class = "col-md-6" width = "100%">
+            <div>
+               <div class = "outfit-box2" >
+                  <img id="outfit-dress" class = "outfit-img" src="/static/wowardrobe/img/dress_holder.svg" alt="">
+                  <div id ="removelink-dress" style = "display:none;">
+                     <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                  </div>
+               </div>
+               <div class = "outfit-box" >
+                  <img id="outfit-top1" class = "outfit-img" src="/static/wowardrobe/img/top_holder.svg" alt="">
+                  <div id = "removelink-top1" style = "display:none;">
+                     <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                  </div>
+               </div>
+               <div class = "outfit-box" >
+                  <img id="outfit-top2" class = "outfit-img" src="/static/wowardrobe/img/coat_holder.svg" alt="">
+                  <div id = "removelink-top2" style = "display:none;">
+                     <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                  </div>
+               </div>
+               <div class = "outfit-box" >
+                  <img id="outfit-bottom1" class = "outfit-img" src="/static/wowardrobe/img/pants_holder.svg" alt="">
+                  <div id = "removelink-bottom1" style = "display:none;">
+                     <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                  </div>
+               </div>
+               <div class = "outfit-box" >
+                  <img id="outfit-bottom2" class = "outfit-img" src="/static/wowardrobe/img/shoes_holder.svg" alt="">
+                  <div id = "removelink-bottom2" style = "display:none;">
+                     <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                  </div>
+               </div>
+            </div>
+            <div class = "text-center" style = "margin-top:10px;">
+               <button type="button" class="btn btn-primary " style = "margin-top:10px;" onclick="openModal();">Save Outfit</button>
+            </div>
+            <div class="modal fade product_view" id="save_outfit">
+               <div class="modal-dialog" style = "width :500px;">
+                  <div class="modal-content">
+                     <div class="modal-header" style = "text-align:right;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                     </div>
+                     <div class="modal-body">
+                        <div class = "text-center">
+                           <p>Outfit Name:
+                              <input type="text" name="outfitname" id="outfit_name">  
+                        </div>
+                        <div id="add-event-tag" class="add-tag-form">
+                           <p>Event:
+                              <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick="$('#eventTags').tagit('removeAll');return false;">Clear</button>
+                           </p>
+                           <ul id="eventTags"></ul>
+                           <div class = "addEventTag">
+                           </div>
+                        </div>
+                        <div id="add-style-tag" class="add-tag-form">
+                           <p>Style:
+                              <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick="$('#styleTags').tagit('removeAll');return false;">Clear</button>
+                           </p>
+                           <ul id="styleTags"></ul>
+                           <div class = "addStyleTag">
+                           </div>
+                        </div>
+                        <div id="add-season-tag" class="add-tag-form">
+                           <p>Season:
+                              <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick="$('#seasonTags').tagit('removeAll');return false;">Clear</button>
+                           </p>
+                           <ul id="seasonTags"></ul>
+                           <div class = "addSeasonTag">
+                           </div>
+                        </div>
+                        <div class = "text-center" style = "margin-top:10px;">
+                           <button class="btn btn-primary" id="saveoutfit">Save</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="data-chart">
+               <div id="pieChart"></div>
+               <svg width="300" height="250" viewBox="0 40 614 426">
+                  <text x="70" y="15" id="temp-title">Temperature Level</text>
+                  <defs>
+                     <clipPath id="myClip">
+                        <polygon points="357.344,49.996 326,51.332 280.672,105.996 256,109.996 226.672,106.668 182,45.996 
+                           11.664,123.004 47.664,235.004 112.328,217.668 119,457.668 389.656,457.668 393.656,214.332 464.328,241.668 500.328,131.668 "/>
+                     </clipPath>
+                  </defs>
+                  <polygon points="357.344,49.996 326,51.332 280.672,105.996 256,109.996 226.672,106.668 182,45.996 
+                     11.664,123.004 47.664,235.004 112.328,217.668 119,457.668 389.656,457.668 393.656,214.332 464.328,241.668 500.328,131.668 " fill="#cccccc" transform="translate(10, 0)"/>
+               </svg>
+            </div>
+         </div>
+         <div class = "col-md-6">
+            <div class="input-group" id="search-bar">
+               <div id="search-tags">
+                  <ul id="searchTags"></ul>
+               </div>
+               <span class="input-group-btn">
+               <button class="btn btn-primary" id="search-btn">
+               <i class="fa fa-search"></i>
+               </button>
+               </span>
+            </div>
+            <br>
+            <ul class="nav nav-tabs" role="tablist">
+               <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#menu0" role="tab">Outwears</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#menu1" role="tab">Tops</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#menu2" role="tab">Bottoms</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#menu3" role="tab">Shoes</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#menu4" role="tab">Dresses</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#menu5" role="tab">Search Results</a>
+               </li>
+            </ul>
+            <div class="tab-content outfit-tab">
+               <div id="menu0" class="tab-pane fade active show">
+                  <br>
+                  <div class = "row">
+                     {% for item in clothes_outwears %}
+                     <div class = "col-lg-3 col-md-4 col-xs-6">
+                        <div class="outfit-img-holder">
+                           <img src={% url 'get_image' item.id%} alt="{{ item.name }}" class="clothes-img outfit_outwear" id = "clothes-{{item.id}}">
+                        </div>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div id="menu1" class="tab-pane fade">
+                  <br>
+                  <div class = "row">
+                     {% for item in clothes_tops %}
+                     <div class = 'col-md-4' >
+                        <div class="outfit-img-holder">
+                           <img src={% url 'get_image' item.id%} alt="{{ item.name }}" class="clothes-img outfit_top" id = "clothes-{{item.id}}">
+                        </div>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div id="menu2" class="tab-pane fade">
+                  <br>
+                  <div class = "row">
+                     {% for item in clothes_bottoms %}
+                     <div class = 'col-md-4' >
+                        <div class="outfit-img-holder">
+                           <img src={% url 'get_image' item.id%} alt="{{ item.name }}" class="clothes-img outfit_bottom" id = "clothes-{{item.id}}">
+                        </div>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div id="menu3" class="tab-pane fade">
+                  <br>
+                  <div class = "row">
+                     {% for item in clothes_shoes %}
+                     <div class = 'col-md-4' style = "margin-bottom:10px;">
+                        <div class="outfit-img-holder">
+                           <img  src={% url 'get_image' item.id%} alt="{{ item.name }}" class="clothes-img outfit_shoes" id = "clothes-{{item.id}}"/> 
+                        </div>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div id="menu4" class="tab-pane fade">
+                  <br>
+                  <div class = "row">
+                     {% for item in clothes_dress %}
+                     <div class = 'col-md-4' style = "margin-bottom:10px;">
+                        <div class="outfit-img-holder">
+                           <img  src={% url 'get_image' item.id%} alt="{{ item.name }}" class="clothes-img outfit_dress" id = "clothes-{{item.id}}"/> 
+                        </div>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               <div id="menu5" class="tab-pane fade">
+                  <br>
+                  <div id ="search_results" class = "row">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   var outwear = "{{ clothes_outwears }}";
+       {% for item in clothes_outwears %}
+           $("#clothes-{{ item.id }}").data('category', "{{ item.category}}");
+           $("#clothes-{{ item.id }}").data('id', "{{ item.id}}");
+           $("#clothes-{{ item.id }}").data('style', "{{ item.style}}");
+           $("#clothes-{{ item.id }}").data('temp_level', "{{ item.temperature_level}}");
+           $("#clothes-{{ item.id }}").data('event', "{{ item.event}}");
+       {% endfor %}
+   var tops = "{{ clothes_tops }}";
+       {% for item in clothes_tops %}
+           $("#clothes-{{ item.id }}").data('category', "{{ item.category}}");
+           $("#clothes-{{ item.id }}").data('id', "{{ item.id}}");
+           $("#clothes-{{ item.id }}").data('style', "{{ item.style}}");
+           $("#clothes-{{ item.id }}").data('temp_level', "{{ item.temperature_level}}");
+           $("#clothes-{{ item.id }}").data('event', "{{ item.event}}");
+       {% endfor %}
+   var bottoms = "{{ clothes_bottoms }}";
+       {% for item in clothes_bottoms %}
+           $("#clothes-{{ item.id }}").data('category', "{{ item.category}}");
+           $("#clothes-{{ item.id }}").data('id', "{{ item.id}}");
+           $("#clothes-{{ item.id }}").data('style', "{{ item.style}}");
+           $("#clothes-{{ item.id }}").data('temp_level', "{{ item.temperature_level}}");
+            $("#clothes-{{ item.id }}").data('event', "{{ item.event}}");
+       {% endfor %}
+   var dress = "{{ clothes_dress }}";
+       {% for item in clothes_dress %}
+           $("#clothes-{{ item.id }}").data('category', "{{ item.category}}");
+           $("#clothes-{{ item.id }}").data('id', "{{ item.id}}");
+           $("#clothes-{{ item.id }}").data('style', "{{ item.style}}");
+           $("#clothes-{{ item.id }}").data('temp_level', "{{ item.temperature_level}}");
+            $("#clothes-{{ item.id }}").data('event', "{{ item.event}}");
+       {% endfor %}
+   var shoes = "{{ clothes_shoes }}";
+       {% for item in clothes_shoes %}
+           $("#clothes-{{ item.id }}").data('category', "{{ item.category}}");
+           $("#clothes-{{ item.id }}").data('id', "{{ item.id}}");
+           $("#clothes-{{ item.id }}").data('style', "{{ item.style}}");
+           $("#clothes-{{ item.id }}").data('temp_level', "{{ item.temperature_level}}");
+            $("#clothes-{{ item.id }}").data('event', "{{ item.event}}");
+       {% endfor %}
+</script>
+{% endblock %}

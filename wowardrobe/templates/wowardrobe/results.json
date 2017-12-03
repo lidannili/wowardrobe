@@ -1,0 +1,3 @@
+{
+	"html": " {% for c in clothes_result %}<div class = 'col-md-4' style = 'margin-bottom:10px;'><div class='thumbnail' id = 'clothes-{{c.id}}'><img  src={% url 'get_image' c.id%} alt='{{ c.name }}'  class='clothes-img search-result'/></div></div>{% if not forloop.last %}{% endif %}{% endfor %}"
+}

@@ -1,0 +1,108 @@
+{% extends "wowardrobe/base.html" %}
+{% load register_tag %}
+{% block title %}WoWardrobe - Expand your Wardrobe{% endblock %}
+{% block head %}
+<script src="/static/wowardrobe/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/expand.js"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/create-tag.js"></script>
+{% endblock %}
+    {% block content %}
+    <div class="bg-faded p-4 my-4">
+    	<hr class="divider">
+    	<h2 class="text-center text-lg text-uppercase my-0">
+    		<strong>Expand your wardrobe</strong>
+    	</h2>
+   <hr class="divider">
+    {% if data %}
+
+    <div class = "text-center">
+      <button id="shuffle-btn" class="btn btn-info" style = "margin-bottom:10px;" onclick="shuffle();">Shuffle
+      <i class="fa fa-refresh fa-lg" aria-hidden="true"></i></button></div>
+   <div class = "row" id = "shopstyle-result">
+           {% for d in data %}
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <a href="{{d.clickUrl}}" class="d-block mb-4 h-100"  target="_blank">
+                        <img class="img-fluid img-thumbnail" src="{{d.imageUrl}}" alt="{{d.name}}">
+                        <small>{{ d.name }}</small>
+                        <small>{{d.price}}</small>
+                    </a>
+               </div>
+           {% endfor %}
+    </div>
+    {% endif %}
+   <form action={% url 'get_clothes_by_budget' %} method="POST" id="expend-form">
+    <div class = "text-center">
+       <img src = "/static/wowardrobe/img/budget.svg" style = "width:70px;height:auto; margin-bottom:10px;">
+    <p>Budget:
+     <input id="budget" name="budget" style = "width:100px;" type="number" min="0" step="10" max="10000" value="" />&nbsp;<i class="fa fa-usd" aria-h idden="true"></i>
+    </div>
+     <div class = "row">
+              <div id="add-brand-tag" class="add-tag-form col-lg-4">
+               <p>Brand:
+                  <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick=
+                     "$('#brandTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="brandTags"></ul>
+               <div class = "addBrandTag">
+                  {% for b in brand%}
+                  <button type = "button" id={{b|replace_str}}-tag class = "btn btn-outline-info" value = '{{b}}'><i class="fa fa-tag" aria-hidden="true"></i> {{b}}</button>
+                  {% endfor %}
+               </div>
+            </div>
+
+            <div id="add-color-tag" class="add-tag-form col-lg-4">
+               <p>Color:
+                  <button type="button" class="btn btn-outline-danger"   style = "float:right;" onclick=
+                     "$('#colorTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="colorTags"></ul>
+               <div class = "addColorTag">
+                  {% for color in colors%}
+                  <button type = "button" id={{color|lower}}-tag class = "btn btn-outline-info" value = '{{color}}'><i class="fa fa-tag" aria-hidden="true"></i> {{color}} </button>
+                  {% endfor %}
+               </div>
+            </div>
+            <div id="add-category-tag" class="add-tag-form col-lg-4">
+               <p>Category: (Only choose one tag)
+                  <button type="button" class="btn btn-outline-danger"   style = "float:right;" onclick=
+                     "$('#categoryTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="categoryTags"></ul>
+               <div class = "addCategoryTag">
+                  {% for c in category%}
+                  <button type = "button" id={{c|lower}}-tag class = "btn btn-outline-info" value = '{{c}}'><i class="fa fa-tag" aria-hidden="true"></i> {{c}}</button>
+                  {% endfor %}
+               </div>
+            </div>
+      </div>
+           <div class = "wtagit-form text-center" style="text-align:center;">
+            <input id="submit-btn" type="submit" class="btn btn-info" value="Submit" />
+            <input id ="reset-form" type="reset" class="btn btn-default" value="Reset" />
+        </div>
+        {% csrf_token %}
+    </form>     
+    </div>
+    </div>
+    <script>
+    $(document).ready(function(){
+            $('#budget').val({{ budget }});
+            {% if categoryTags %}
+            {% for item in categoryTags %}
+                $('#categoryTags').tagit('createTag', "{{item}}");
+            {% endfor %}
+            {% endif %}
+            {% if colorTags %}
+            {% for item in colorTags %}
+                $('#colorTags').tagit('createTag', "{{ item}}");
+            {% endfor %}
+            {% endif %}
+            {% if brandTags %}
+            {% for item in brandTags %}
+                $('#brandTags').tagit('createTag', "{{ item}}".replace("&amp;","&"));
+            {% endfor %}
+            {% endif %}
+    });
+
+
+    </script>
+   {% endblock %}

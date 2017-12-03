@@ -1,0 +1,106 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}My WoWardrobe{% endblock %}
+{% block head %}
+<script type="text/javascript" src="/static/wowardrobe/js/mywardrobe.js"></script>
+<script src="/static/wowardrobe/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/edit-tags.js"></script>
+{% endblock %}
+{% block content %}
+
+<div class="bg-faded p-4 my-4">
+   <hr class="divider">
+   <h2 class="text-center text-lg text-uppercase my-0">
+      <strong>Edit Clothes</strong>
+   </h2>
+   <hr class="divider">
+   <div class = "row">
+     <div class = "col-md-4">
+   <img  src={% url 'get_image' id%} alt="{{ name }}" class="edit-clothes-img"/>
+ </div>
+   <div class = "col-md-8 col-lg-8">
+      <form id="add-tag-form" method="post" action={% url 'edit_clothes' id%}>
+         <div class = "row">
+             <div class="add-tag-form col-lg-8">
+                 <p>Name:</p>
+                <input name="name" value="{{ name }}"/>
+             </div>
+              <div id="add-brand-tag" class="add-tag-form col-lg-8">
+               <p>Brand: </p>
+               <ul id="brandTags">
+                 {% for c in brand %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+            <div id="add-color-tag" class="add-tag-form col-lg-8">
+               <p>Color: </p>
+               <ul id="colorTags">
+                 {% for c in color %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+            <div id="add-category-tag" class="add-tag-form col-lg-8">
+               <p>Category:</p>
+               <ul id="categoryTags">
+                   {% for c in category %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+            <hr>
+
+            <div id="add-event-tag" class="add-tag-form col-lg-8">
+               <p>Event:</p>
+               <ul id="eventTags">
+                   {% for c in event %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+
+              <div id="add-style-tag" class="add-tag-form col-lg-8">
+               <p>Style:</p>
+               <ul id="styleTags">
+                   {% for c in style %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+
+            <div id="add-season-tag" class="add-tag-form col-lg-8">
+               <p>Season:</p>
+               <ul id="seasonTags">
+                   {% for c in season %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+
+            <div id="add-weather-tag" class="add-tag-form col-lg-8">
+               <p>Weather:</p>
+               <ul id="weatherTags">
+                   {% for c in weather %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+            <div id="add-temp-tag" class="add-tag-form col-lg-8">
+               <p>Temperature:</p>
+               <ul id="tempTags">
+                   <li>{{ temp }}</li>
+               </ul>
+            </div>
+         </div>
+         <hr>
+         <div class = "wtagit-form" style="text-align:center;">
+            <input type="submit" class="btn btn-info" value="Save">
+        </div>
+    {% csrf_token %}
+      </form>
+   <hr>
+<!--    <div class="row text-center text-lg-left">
+
+   </div> -->
+</div>
+{% endblock %}

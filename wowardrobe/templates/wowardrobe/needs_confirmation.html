@@ -1,0 +1,10 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}WoWardrobe|Confirm Registeration{% endblock %}
+{% block content %}
+   <form class="form-signin" action="{% url 'login' %}" method="post">
+       A confirmation email has been sent to {{email}}.  Please click the link
+	   in that email to confirm your email address and complete your registration for
+       Wowardrobe.
+     </p>
+   </form>
+{% endblock %}

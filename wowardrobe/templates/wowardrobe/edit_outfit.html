@@ -1,0 +1,92 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}Edit Outfit{% endblock %}
+{% block head %}
+<script type="text/javascript" src="/static/wowardrobe/js/mywardrobe.js"></script>
+<script src="/static/wowardrobe/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/edit-tags.js"></script>
+{% endblock %}
+{% block content %}
+
+<div class="bg-faded p-4 my-4">
+   <hr class="divider">
+   <h2 class="text-center text-lg text-uppercase my-0">
+      <strong>Edit Outfit</strong>
+   </h2>
+   <hr class="divider">
+   <div class = "row">
+         <div class = "col-md-6">
+            <div class = "row my-outfit">
+               {% if outfit.dress %}
+               <div class = "col-md-6 thumnail"><img  src={% url 'get_image' outfit.dress.id%} alt="{{ item.dress.name }}" class="clothes-img outfit_dress" id = "clothes-{{dress.id}}"/></div>
+               {% endif %}
+               {% if outfit.top1  %}
+               <div class = "col-md-6 thumnail"><img  src={% url 'get_image' outfit.top1.id%} alt="{{ outfit.top1.name }}" class="clothes-img outfit_top1" id = "clothes-{{top1.id}}"/></div>
+               {% endif %}
+               {% if outfit.top2 %}
+               <div class = "col-md-6 thumnail"><img  src={% url 'get_image' outfit.top2.id%} alt="{{ outfit.top2.name }}" class="clothes-img outfit_top2" id = "clothes-{{top2.id}}"/></div>
+               {% endif %}
+               {% if outfit.bottom %}
+               <div class = "col-md-6 thumnail"><img  src={% url 'get_image' outfit.bottom.id%} alt="{{ outfit.bottom.name }}" class="clothes-img outfit_bottom" id = "clothes-{{bottom.id}}"/></div>
+               {% endif %}
+               {% if outfit.shoes %}
+               <div class = "col-md-6 thumnail"><img  src={% url 'get_image' outfit.shoes.id%} alt="{{ outfit.shoes.name }}" class="clothes-img outfit_shoes" id = "clothes-{{shoes.id}}"/></div>
+               {% endif %}
+            </div>
+         </div>
+         <div class = "col-md-1">
+         </div>
+         <div class = "col-md-5">
+          <form id="add-tag-form" method="post" action={% url 'edit_outfit' outfit.id%}>
+         <div class = "row">
+             <div class="add-tag-form col-lg-8">
+                 <p>Name:</p>
+                <input name="name" value="{{ name }}"/>
+             </div>
+
+            <hr>
+
+            <div id="add-event-tag" class="add-tag-form col-lg-8">
+               <p>Event:
+               <ul id="eventTags">
+                   {% for c in event %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+
+              <div id="add-style-tag" class="add-tag-form col-lg-8">
+               <p>Style:
+               <ul id="styleTags">
+                   {% for c in style %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+
+            <div id="add-season-tag" class="add-tag-form col-lg-8">
+               <p>Season:</p>
+               <ul id="seasonTags">
+                   {% for c in season %}
+                     <li>{{ c }}</li>
+                   {% endfor %}
+               </ul>
+            </div>
+            <div id="add-temp-tag" class="add-tag-form col-lg-8">
+               <p>Temperature:</p>
+               <ul id="tempTags">
+                   <li>{{ temp }}</li>
+               </ul>
+            </div>
+         </div>
+         <hr>
+         <div class = "wtagit-form" style="text-align:center;">
+            <input type="submit" class="btn btn-info" value="Save">
+        </div>
+    {% csrf_token %}
+      </form>
+
+
+         </div>
+      </div>
+</div> 
+{% endblock %}

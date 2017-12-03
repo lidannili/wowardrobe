@@ -1,0 +1,90 @@
+{% extends "wowardrobe/base.html" %}
+    {% block title %}WoWardrobe - View Clothes{% endblock %}
+
+        <!-- Page Content -->
+    {% block content %}
+    <div class="bg-faded p-4 my-4">
+      <hr class="divider">
+   <h2 class="text-center text-lg text-uppercase my-0">
+      <strong>{{tags}}</strong>
+   </h2>
+   <hr class="divider">
+
+      <div class="row text-center text-lg-left">
+         {% for item in clothes %}
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class = "clothes-img-holder">
+            <img  src={% url 'get_image' item.id%} alt="{{ item.name }}" class="clothes-img"/>
+          </div>
+            <div style = "text-align:center">
+            <h5 style = "text-align:center;margin-top:10px;";>{{item.name}}</h5>
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#_{{item.id}}" style = "margin-top:10px;"><i class="fa fa-search"></i> Quick View</button>
+            </div>
+      </div>
+       {% endfor %}
+    </div>
+
+     {% for item in clothes %}
+    <div class="modal fade product_view" id="_{{item.id}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left">{{item.name}}</h3>
+                    
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class = "col-md-6">
+                    <img class="img-fluid img-thumbnail" src={% url 'get_image' item.id%} alt="">
+                  </div>
+                  <div class = "col-md-6">
+                    <table style="width:100%">
+                      <tr>
+                            <td style = "font-weight: bold">Name:</td>
+                            <td>{{ item.name }}</td>
+                        </tr>
+                      <tr>
+                          <td style = "font-weight: bold">Color:</td>
+                          <td>{{item.color}}</td> 
+                      </tr>
+                      <tr>
+                          <td style = "font-weight: bold" >Brand:</td>
+                          <td>{{item.brand}}</td> 
+                      </tr>
+                      <tr>
+                        <td style = "font-weight: bold">Category:</td>
+                        <td>{{item.category}}</td> 
+                      </tr>
+                      <tr>
+                          <td style = "font-weight: bold">Season:</td>
+                          <td>{{item.season}}</td> 
+                      </tr>
+                      <tr>
+                          <td style = "font-weight: bold">Event:</td>
+                          <td>{{item.event}}</td> 
+                      </tr>
+                       <tr>
+                          <td style = "font-weight: bold">Weather:</td>
+                          <td>{{item.weather}}</td> 
+                      </tr>
+                      </table>
+                    </div>
+
+                </div>
+                <div style = "float:right;">
+                <a href = {% url 'edit_clothes' item.id%}>
+                 <button type="button" class="btn btn-primary">Edit</button>
+               </a>
+               <a href = {% url 'remove_clothes' item.id%}>
+                 <button type ="button" class = "btn btn-danger">Remove</button>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endfor %}
+
+{% endblock %}

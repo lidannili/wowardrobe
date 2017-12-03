@@ -1,0 +1,222 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}My WoWardrobe{% endblock %}
+{% block head %}
+<script src="/static/wowardrobe/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/mywardrobe.js"></script>
+{% endblock %}
+{% block content %}
+
+<div class="bg-faded p-4 my-4">
+      <hr class="divider">
+   <h2 class="text-center text-lg text-uppercase my-0">
+      <strong>My Wardrobe</strong>
+   </h2>
+   <hr class="divider">
+
+      <form class="form-inline my-2 my-lg-0 mr-lg-2" method="GET" action={% url 'searchByTags' %}>
+      <div class="input-group" id="search-bar">
+            <div id="search-tags">
+               <ul id="searchTags"></ul>
+            </div>
+         <span class="input-group-btn">
+         <button class="btn btn-primary" type="submit" id="search-btn">
+         <i class="fa fa-search"></i>
+         </button>
+         </span>
+      </div>
+   </form>
+
+   <br>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#home" role="tab">All</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu1" role="tab">Category</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu2" role="tab">Season</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu3" role="tab">Event</a>
+  </li>
+</ul>
+
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade show active">
+      <br>
+   <div class="row text-center text-lg-left">
+      <div id = "tops" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=Top" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/shirt.svg" alt="">
+          <h5 style="text-align:center;">Tops</h5>
+         </a>
+      </div>
+      <div id = "bottoms" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=Bottom" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/bottom.png" alt="">
+          <h5 style="text-align:center;">Bottoms</h5>
+         </a>
+      </div>
+      <div id = "jackets" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=Outwear" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/outwear.svg" alt="">
+         <h5 style="text-align:center;">Outwear</h5>
+         </a>
+      </div>
+      <div id = "shoes" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=Shoes" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/sneakers.png"alt="">
+         <h5 style="text-align:center;">Shoes</h5>
+         </a>
+      </div>
+      <div id = "spring" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=Spring" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/spring.svg" alt="">
+         <h5 style="text-align:center;">Spring</h5>
+         </a>
+      </div>
+      <div id = "summer" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=Summer" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/summer.svg" alt="">
+         <h5 style="text-align:center;">Summer</h5>
+         </a>
+      </div>
+      <div id = "fall" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=Fall" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/fall.png" alt="">
+         <h5 style="text-align:center;">Fall</h5>
+         </a>
+      </div>
+      <div id = "winter" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=Winter" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/winter.svg" alt="">
+         <h5 style="text-align:center;">Winter</h5>
+         </a>
+      </div>
+      <div id = "daily" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=Everyday" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/daily.svg" alt="">
+         <h5 style="text-align:center;">Daily</h5>
+         </a>
+      </div>
+      <div id = "workwear" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=Work" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/work.svg" alt="">
+         <h5 style="text-align:center;">Workwear</h5>
+         </a>
+      </div>
+      <div id = "party" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=Party" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/party.png" alt="">
+         <h5 style="text-align:center;">Party</h5>
+         </a>
+      </div>
+      <div id = "travel" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=Travel" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/sport.svg" alt="">
+         <h5 style="text-align:center;">Travel</h5>
+         </a>
+      </div>
+   </div>
+ </div>
+
+    <div id="menu1" class="tab-pane fade">
+      <br>
+       <div class="row text-center text-lg-left">
+      <div id = "tops" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=top/shirt/t-shirt" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/shirt.svg" alt="">
+          <h5 style="text-align:center;">Tops</h5>
+         </a>
+      </div>
+      <div id = "bottoms" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=bottom/pants/jeans" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/bottom.png" alt="">
+          <h5 style="text-align:center;">Bottoms</h5>
+         </a>
+      </div>
+      <div id = "jackets" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=outwear" class="d-block mb-4 h-100"> 
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/outwear.svg" alt="">
+         <h5 style="text-align:center;">Outwear</h5>
+         </a>
+      </div>
+      <div id = "shoes" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=shoes" class="d-block mb-4 h-100"> 
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/sneakers.png"alt="">
+         <h5 style="text-align:center;">Shoes</h5>
+         </a>
+      </div>
+      <div id = "Dress" class="col-lg-3 col-md-4 col-xs-6">
+         <a href="/wowardrobe/view_clothes?tag=dress" class="d-block mb-4 h-100"> 
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/dress.png"alt="">
+         <h5 style="text-align:center;">Dress</h5>
+         </a>
+      </div>
+    </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <br>
+       <div class="row text-center text-lg-left">
+          <div id = "spring" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=spring" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/spring.svg" alt="">
+         <h5 style="text-align:center;">Spring</h5>
+         </a>
+      </div>
+      <div id = "summer" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=summer" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/summer.svg" alt="">
+         <h5 style="text-align:center;">Summer</h5>
+         </a>
+      </div>
+      <div id = "fall" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=fall" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/fall.png" alt="">
+         <h5 style="text-align:center;">Fall</h5>
+         </a>
+      </div>
+      <div id = "winter" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=winter" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/winter.svg" alt="">
+         <h5 style="text-align:center;">Winter</h5>
+         </a>
+      </div>
+    </div>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+        <br>
+         <div class="row text-center text-lg-left">
+      <div id = "daily" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=daily" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/daily.svg" alt="">
+         <h5 style="text-align:center;">Daily</h5>
+         </a>
+      </div>
+      <div id = "workwear" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=work" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/work.svg" alt="">
+         <h5 style="text-align:center;">Workwear</h5>
+         </a>
+      </div>
+      <div id = "party" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=party" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/party.png" alt="">
+         <h5 style="text-align:center;">Party</h5>
+         </a>
+      </div>
+      <div id = "activewear" class="col-lg-3 col-md-4 col-xs-6"> 
+         <a href="/wowardrobe/view_clothes?tag=travel" class="d-block mb-4 h-100">
+         <img class="img-fluid img-thumbnail" src="/static/wowardrobe/img/sport.svg" alt="">
+         <h5 style="text-align:center;">Travel</h5>
+         </a>
+      </div>
+    </div>
+  </div>
+  </div>
+    
+</div>
+{% endblock %}

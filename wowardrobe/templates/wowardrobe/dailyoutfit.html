@@ -1,0 +1,62 @@
+{% extends "wowardrobe/base.html" %}
+    {% block title %}WoWardrobe - Get Your Daily Outfit{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block content %}
+    <div class="bg-faded p-4 my-4">
+    	<hr class="divider">
+    	<h2 class="text-center text-lg text-uppercase my-0">
+    		<strong>What to wear today?</strong>
+    	</h2>
+   <hr class="divider">
+   {% if schedule %}
+   <div class = "row">
+    <div class = "col-md-6 text-center">
+         <h5>Today</h5>
+            {% if schedule.today %}
+          <div id = "today-outfit" class = "row my-outfit" >
+            {% if schedule.today.dress %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.today.dress.id%} alt="{{ item.dress.name }}" class="clothes-img outfit_shoes" id = "clothes-{{dress.id}}"/></div>
+            {% endif %}
+            {% if schedule.today.top1  %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.today.top1.id%} alt="{{ item.top1.name }}" class="clothes-img outfit_top1" id = "clothes-{{top1.id}}"/></div>
+            {% endif %}
+            {% if schedule.today.top2 %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.today.top2.id%} alt="{{ item.top2.name }}" class="clothes-img outfit_top2" id = "clothes-{{top2.id}}"/></div>
+            {% endif %}
+            {% if schedule.today.bottom %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.today.bottom.id%} alt="{{ item.bottom.name }}" class="clothes-img outfit_bottom" id = "clothes-{{bottom.id}}"/></div>
+            {% endif %}
+            {% if schedule.today.shoes %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.today.shoes.id%} alt="{{ item.shoes.name }}" class="clothes-img outfit_shoes" id = "clothes-{{shoes.id}}"/></div>
+            {% endif %}
+          </div>
+            {% endif %}
+    </div>
+   
+   <div class = "col-md-6 text-center" >
+    <h5>Tomorrow</h5>
+      {% if schedule.tomorrow %}
+    <div id = "tomorrow-outfit" class = "row my-outfit">
+            {% if schedule.tomorrow.dress %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.tomorrow.dress.id%} alt="{{ item.dress.name }}" class="clothes-img outfit_shoes" id = "clothes-{{dress.id}}"/></div>
+            {% endif %}
+            {% if schedule.tomorrow.top1  %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.tomorrow.top1.id%} alt="{{ item.top1.name }}" class="clothes-img outfit_top1" id = "clothes-{{top1.id}}"/></div>
+            {% endif %}
+            {% if schedule.tomorrow.top2 %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.tomorrow.top2.id%} alt="{{ item.top2.name }}" class="clothes-img outfit_top2" id = "clothes-{{top2.id}}"/></div>
+            {% endif %}
+            {% if schedule.tomorrow.bottom %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.tomorrow.bottom.id%} alt="{{ item.bottom.name }}" class="clothes-img outfit_bottom" id = "clothes-{{bottom.id}}"/></div>
+            {% endif %}
+            {% if schedule.tomorrow.shoes %}
+            <div class = "col-md-6 thumnail"><img  src={% url 'get_image' schedule.tomorrow.shoes.id%} alt="{{ item.shoes.name }}" class="clothes-img outfit_shoes" id = "clothes-{{shoes.id}}"/></div>
+            {% endif %}
+    </div>
+    {% endif %}
+   </div>
+    </div>
+     {% endif %}
+   {% endblock %}

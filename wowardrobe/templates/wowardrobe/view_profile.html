@@ -1,0 +1,44 @@
+{% extends "wowardrobe/base.html" %}
+    {% block title %}WoWardrobe - Edit Profile{% endblock %}
+{% block head %}
+
+{% endblock %}
+    {% block content %}
+    <div class="bg-faded p-4 my-4">
+    	<hr class="divider">
+    	<h2 class="text-center text-lg text-uppercase my-0">
+    		<strong>My Profile</strong>
+    	</h2>
+   <hr class="divider">
+
+           <table style="margin:1em auto;">
+                <tr>
+                    <td><b>Username:</b></td>
+                    <td>{{profile.user.username}}</td>
+                </tr>
+                <tr>
+                    <td><b>Email:</b></td>
+                    <td>{{profile.user.email}}</td>
+                </tr>
+                <tr>
+                    <td><b>First Name:</b></td>
+                    <td>{{profile.user.first_name}}</td>
+                </tr>
+                <tr>
+                    <td><b>Last Name:</b></td>
+                    <td>{{profile.user.last_name}}</td>
+                </tr>
+                <tr>
+                    <td><b>Date of Birth:</b></td>
+                    <td>{{profile.date_of_birth}}</td>
+                </tr>
+                <tr>
+                    <td><b>Gender:</b></td>
+                    <td>{{profile.gender}}</td>
+                </tr>
+
+        </table>
+
+
+    </div>
+{% endblock %}

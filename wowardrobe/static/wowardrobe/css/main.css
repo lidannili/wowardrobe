@@ -1,0 +1,340 @@
+.add-tag-form {
+    margin-bottom: 10px;
+}
+.product_view .modal-dialog{max-width: 800px; width: 100%;}
+.pre-cost{text-decoration: line-through; color: #a5a5a5;}
+.space-ten{padding: 10px 0;}
+
+#upload-widget{
+	text-align: center;
+	width:400px;
+	height:400px;
+	margin: 0 auto; 
+}
+
+button {
+	cursor: pointer;
+}
+
+#add-tag-form .wtagit-form input{
+	cursor:pointer;
+}
+
+#add-tag-form .add-tag-form button{
+	 border-radius: 15px;
+	 font-size: 12px;
+}
+
+.error {
+	color: red;
+	text-align: center;
+	display: none;
+}
+
+.input-error {
+  color: red;
+  display: none;
+}
+
+.grid-divider {
+  position: relative;
+  padding: 0;
+}
+.grid-divider>[class*='col-'] {
+  position: static;
+}
+
+.grid-divider>[class*='col-']:nth-child(n+2):before {
+  content: "";
+  border-left: 1px solid #DDD;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.col-padding {
+  padding: 0 15px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+
+#searchTags {
+	margin-bottom: 0px;
+}
+
+#search-tags {
+  margin: auto;
+	width: 100%;
+}
+
+
+#search-bar {
+  margin: auto;
+	width: 100%;
+}
+
+.edit-clothes-img {
+	width: 100%;
+}
+
+.clothes-img-container{
+   position: relative;
+   display: inline-block; 
+   overflow: hidden; 
+
+}
+
+.clothes-img-container img:hover {
+    opacity: 0.5
+}
+.clothes-img-container:hover a {
+    opacity: 1; /* added */
+    top: 0; /* added */
+    z-index: 500;
+}
+
+.clothes-img-container:hover a span {
+    top: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+/* added */
+.clothes-img-container a {
+    display: block;
+    position: absolute;
+    top: -100%;
+    opacity: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    color: inherit;
+}
+
+.clothes-img {
+  margin-top:10px;
+  cursor: pointer;
+  margin: 0 auto;
+  text-align: center;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.outfit-img {
+    max-width:90%;
+    max-height:95%;
+    margin:auto;
+}
+
+.thumbnail{
+  margin-top: 10px;
+}
+
+.form-signin {
+  max-width: 450px;
+  width:400px;
+  padding: 15px;
+  margin: 0 auto;
+  text-align: center;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin h1{
+  font-size: 50px;
+}
+.form-signin .error{
+  color:red;
+}
+.errorlist li{
+  color:red;
+}
+
+.outfit-box {
+    box-sizing: border-box;
+    float: left;
+    width: 33%;
+    height: 175px;
+    display: flex;
+}
+
+.outfit-box2{
+    box-sizing: border-box;
+    float: left;
+    width: 33%;
+    height: 350px;
+    display: flex;
+    border-right:0.5px solid black;
+}
+
+/* This is one way of adding borders, 
+   if you *always* know that you have exactly 4 cells 
+   aligned like this */
+.outfit-box:first-child {
+    border-bottom: 0.5px solid black;
+}
+.outfit-box:nth-child(2) {
+    border-bottom: 0.5px solid black;  
+}
+.outfit-box:nth-child(3) {
+    border-left:0.5px solid black;
+    border-bottom: 0.5px solid black;
+}
+.outfit-box:nth-child(4) {
+    border-right: 0.5px solid black;
+}
+
+.cc-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.cc-selector input:active +.clothes-cc{opacity: .9;}
+.cc-selector input:checked +.clothes-cc{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.clothes-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.clothes-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.edit-clothes-img {
+	width: 100%;
+}
+
+.bold-font{
+	font-weight: bold;
+}
+
+#top {
+	position: fixed;
+	top: auto;
+	bottom: 40px;
+	z-index: 101;
+	right: 17px;
+}
+
+.link {
+	color: blue;
+	text-decoration: underline;
+}
+
+.hidden {
+	display: none;
+}
+
+.menu-button {
+	background-color: transparent;
+}
+
+a {
+	cursor: pointer;
+}
+
+.radio-group {
+	margin: 15px;
+}
+
+.radio-btn {
+	margin-right: 15px;
+}
+
+#data-chart {
+  display: flex;
+}
+
+#temp-title {
+  font-size: 3rem;
+}
+
+.my-outfit{
+  border: 2px solid #a1a1a1;
+  padding: 10px 40px; 
+  border-radius: 25px;
+  margin:auto;
+}
+
+#id_gender{
+    list-style: none;
+    margin:auto;
+}
+#id_gender li{
+    display: inline-block;
+}
+
+.clothes-img-holder{
+  background-color: white;
+  width:100%;
+  height:80%;
+  margin:auto;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+.outfit-img-holder{
+  background-color: white;
+  width:100%;
+  height:100%;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+.outfit-tab{
+    width: 100%;
+    height: 500px;
+    overflow: scroll;
+}

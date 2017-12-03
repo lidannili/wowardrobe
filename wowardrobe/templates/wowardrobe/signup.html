@@ -1,0 +1,32 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}WoWardrobe|Singup{% endblock %}
+{% block content %}
+<div class="bg-faded p-4 my-4">	
+	<hr class="divider">
+   <h2 class="text-center text-lg text-uppercase my-0">
+      <i class="fa fa-lock" aria-hidden="true"></i>&nbsp<strong>Sign Up</strong>
+   </h2>
+  <hr class="divider">
+  <div class = "row">
+  		<div class = 'col-md-3'>
+		</div>
+		<div class = 'col-md-6' >
+ <form class="form-signin" action="{%url 'register' %}" method="post">
+      <table  style="margin:1em auto;">
+         {{form}}
+         <td colspan="2" class = "text-center">      
+         	<button class="btn btn-lg btn-primary text-center" type="submit">Sign Up</button>
+         </td>
+      </table>
+      {% csrf_token %}
+ 
+       <br>
+       <div class = "text-center">
+       <u><a href="login">Already a member? Log In here</a></u>
+   	</div>
+</form>   
+</div>
+</div>
+
+</div>
+{% endblock %}

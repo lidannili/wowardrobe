@@ -1,0 +1,41 @@
+{% extends "wowardrobe/base.html" %}
+    {% block title %}WoWardrobe - Edit Profile{% endblock %}
+{% block head %}
+
+{% endblock %}
+    {% block content %}
+    <div class="bg-faded p-4 my-4">
+    	<hr class="divider">
+    	<h2 class="text-center text-lg text-uppercase my-0">
+    		<strong>Edit Profile</strong>
+    	</h2>
+   <hr class="divider">
+
+   <form enctype = "multipart/form-data" class="form-signin" action="{% url 'edit_profile' %}" method="post">
+   <!--  <a class="nav-link" href="/grumblr/password">Change Password</a> -->
+    {% for error in form.non_field_errors %}
+      <p style="color: red">
+        {{ error }}
+    </p>
+    {% endfor %}
+    {% if form.image.value %}
+    <img src = "{% url 'get_profile_image' user.id %}" alt = "{{form.first_name.value}} {{form.last_name.value}}" width = "200px">
+    {% endif %}
+        <table style="margin:1em auto;">
+            {% for field in form.visible_fields %}
+                <tr>
+                    <td>{{field.label_tag}}</td>
+                    <td>{{field}}</td>
+                    <td class="error">
+                        {% for error in field.errors %} {{error}} {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+      {% csrf_token %}
+      <div class = "text-center">
+       <button class="btn btn-lg btn-primary text-center" type="submit">Save Profile</button>
+   </div>
+</form>
+    </div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}My WoWardrobe{% endblock %}
+{% block head %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/overview.js"></script>
+{% endblock %}
+{% block content %}
+<div class="bg-faded p-4 my-4">
+        <hr class="divider">
+   <h2 class="text-center text-lg text-uppercase my-0">
+      <strong>Overview of My Wardrobe</strong>
+   </h2>
+   <hr class="divider">
+	<div id="overview" class = "text-center">
+	<div class="row">
+    <div class="col-lg-12" id="category-text"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" id="color-text"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" id="brand-text"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" id="style-text"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" id="event-text"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12" id="season-text"></div>
+  </div>
+  <br/>
+	<div class="row">
+    <div class="col-lg-2 bold-font">Overview</div>
+    <div class="col-lg-5 bold-font">Percentage Overview</div>
+    <div class="col-lg-5 bold-font">Top 5 Overview</div>
+  </div>
+  <div class="row" id="category-overview">
+    <div class="col-lg-2">Category</div>
+    <div class="col-lg-5"><div id="category-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="category-column-chart"></div></div>
+  </div>
+  <div class="row" id="top-overview">
+    <div class="col-lg-2">Tops</div>
+    <div class="col-lg-5"><div id="top-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="top-column-chart"></div></div>
+  </div>
+  <div class="row" id="bottom-overview">
+    <div class="col-lg-2">Bottoms</div>
+    <div class="col-lg-5"><div id="bottom-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="bottom-column-chart"></div></div>
+  </div>
+  <div class="row" id="shoes-overview">
+    <div class="col-lg-2">Shoes</div>
+    <div class="col-lg-5"><div id="shoes-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="shoes-column-chart"></div></div>
+  </div>
+  <div class="row" id="color-overview">
+    <div class="col-lg-2">Colors</div>
+    <div class="col-lg-5"><div id="color-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="color-column-chart"></div></div>
+  </div>
+  <div class="row" id="brand-overview">
+    <div class="col-lg-2">Brands</div>
+    <div class="col-lg-5"><div id="brand-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="brand-column-chart"></div></div>
+  </div>
+  <div class="row" id="season-overview">
+    <div class="col-lg-2">Seasons</div>
+    <div class="col-lg-5"><div id="season-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="season-column-chart"></div></div>
+  </div>
+  <div class="row" id="style-overview">
+    <div class="col-lg-2">Styles</div>
+    <div class="col-lg-5"><div id="style-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="style-column-chart"></div></div>
+  </div>
+  <div class="row" id="event-overview">
+    <div class="col-lg-2">Events</div>
+    <div class="col-lg-5"><div id="event-pie-chart"></div></div>
+    <div class="col-lg-5"><div id="event-column-chart"></div></div>
+  </div>
+</div>
+</div>
+<button id="top"><a href="#logo">&uarr; TOP</a></button>
+{% endblock %}

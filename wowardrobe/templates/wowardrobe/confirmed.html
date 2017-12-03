@@ -1,0 +1,11 @@
+{% extends "wowardrobe/base.html" %}
+{% block title %}WoWardrobe|Confirm Registeration{% endblock %}
+{% block content %}
+   <form class="form-signin" action="{% url 'login' %}" method="post">
+       <p>
+        Thank you for confirming your email address.
+        Please <a href="{% url 'login' %}"><u><b>login</b></u></a> to access your account.
+     </p>
+
+   </form>
+{% endblock %}

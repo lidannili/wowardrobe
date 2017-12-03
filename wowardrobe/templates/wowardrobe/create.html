@@ -1,0 +1,166 @@
+{% extends "wowardrobe/base.html" %}
+{% load register_tag %}
+{% block title %}Create Wardrobe{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/wowardrobe/css/dropzone.css"/>
+<link rel="stylesheet" type="text/css" href="/static/wowardrobe/font-awesome/css/font-awesome.min.css"/>
+<!-- Bootstrap core JavaScript -->
+<script src = "/static/wowardrobe/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src = "/static/wowardrobe/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/dropzone.js" ></script>
+<script src="/static/wowardrobe/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/static/wowardrobe/js/create-tag.js"></script>
+{% endblock %}
+<div class="container">
+{% block content %}
+<div class="bg-faded p-4 my-4">
+   <hr class="divider">
+   <h2 class="text-center text-lg text-uppercase my-0">
+      <strong>Upload Image of Your Clothes</strong>
+   </h2>
+  <hr class="divider">
+{% if messages %}
+<div class="messages alert alert-success">
+{% for message in messages %}
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- <div class="alert alert-success fade in">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>Success!</strong> Your message has been sent successfully.
+</div> -->
+   <form  id="upload-widget" method="post" action={% url 'upload' %} class="dropzone">
+      {% csrf_token %}
+   </form>
+   <div class="error" id="image-error">Clothes image is required!</div>
+  </a>
+   <hr>
+   <div class="table table-striped files" id="previews" style = "display:none;">
+      <hr class="divider">
+      <h2 class="text-center text-lg text-uppercase my-0">
+         <i class="fa fa-tags" aria-hidden="true"></i> <strong>Add Tags</strong>
+      </h2>
+      <hr class="divider">
+      <br>
+      <form id="add-tag-form" method="post" action={% url 'create' %}>
+         <div class = "row">
+              <div id="add-brand-tag" class="add-tag-form col-lg-4">
+               <p>Brand:
+                  <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick=
+                     "$('#brandTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="brandTags"></ul>
+               <div class = "addBrandTag">
+                  {% for b in brand%}
+                  <button type = "button" id={{b|replace_str}}-tag class = "btn btn-outline-info" value = '{{b}}'><i class="fa fa-tag" aria-hidden="true"></i> {{b}}</button>
+                  {% endfor %}
+               </div>
+            </div>
+            <div id="add-color-tag" class="add-tag-form col-lg-4">
+               <p>Color:
+                  <button type="button" class="btn btn-outline-danger"   style = "float:right;" onclick=
+                     "$('#colorTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="colorTags"></ul>
+               <div class = "addColorTag">
+                  {% for color in colors%}
+                  <button type = "button" id={{color|lower}}-tag class = "btn btn-outline-info" value = '{{color}}'><i class="fa fa-tag" aria-hidden="true"></i> {{color}} </button>
+                  {% endfor %}
+               </div>
+            </div>
+            <div id="add-category-tag" class="add-tag-form col-lg-4">
+               <p>Category: (Only choose one tag)
+                  <button type="button" class="btn btn-outline-danger"   style = "float:right;" onclick=
+                     "$('#categoryTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="categoryTags"></ul>
+               <div class = "addCategoryTag">
+                  {% for c in category%}
+                  <button type = "button" id={{c|lower}}-tag class = "btn btn-outline-info" value = '{{c}}'><i class="fa fa-tag" aria-hidden="true"></i> {{c}}</button>
+                  {% endfor %}
+               </div>
+            </div>
+            <hr>
+
+            <div id="add-event-tag" class="add-tag-form col-lg-4">
+               <p>Event:
+                  <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick=
+                     "$('#eventTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="eventTags"></ul>
+               <div class = "addEventTag">
+                  {% for e in event%}
+                  <button type = "button" id={{e|lower}}-tag class = "btn btn-outline-info" value = '{{e}}'><i class="fa fa-tag" aria-hidden="true"></i> {{e}}</button>
+                  {% endfor %}
+               </div>
+            </div>
+
+              <div id="add-style-tag" class="add-tag-form col-lg-4">
+               <p>Style:
+                  <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick=
+                     "$('#styleTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="styleTags"></ul>
+               <div class = "addStyleTag">
+                  {% for s in style%}
+                  <button type = "button" id={{s|lower}}-tag class = "btn btn-outline-info" value = '{{s}}'><i class="fa fa-tag" aria-hidden="true"></i> {{s}}</button>
+                  {% endfor %}
+               </div>
+            </div>
+
+            <div id="add-season-tag" class="add-tag-form col-lg-4">
+               <p>Season:
+                  <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick=
+                     "$('#seasonTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="seasonTags"></ul>
+               <div class = "addSeasonTag">
+                  {% for s in season%}
+                  <button type = "button" id={{s|lower}}-tag class = "btn btn-outline-info" value = '{{ s }}'> <i class="fa fa-tag" aria-hidden="true"></i> {{ s }}</button>
+                  {% endfor %}
+               </div>
+            </div>
+
+            <div id="add-weather-tag" class="add-tag-form col-lg-4">
+               <p>Weather:
+                  <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick=
+                     "$('#weatherTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="weatherTags"></ul>
+               <div class = "addWeatherTag">
+                  {% for w in weather%}
+                  <button type = "button" id={{w|lower}}-tag class = "btn btn-outline-info" value = '{{w}}'><i class="fa fa-tag" aria-hidden="true"></i> {{w}}</button>
+                  {% endfor %}
+               </div>
+            </div>
+            <div id="add-temp-tag" class="add-tag-form col-lg-4">
+               <p>Temperature: (Only choose one tag)
+                  <button type="button" class="btn btn-outline-danger" style = "float:right;" onclick=
+                     "$('#tempTags').tagit('removeAll');return false;">Clear</button>
+               </p>
+               <ul id="tempTags"></ul>
+               <div class = "addTempTag">
+                  {% for t in t_level%}
+                  <button type = "button" id={{t}}-tag class = "btn btn-outline-info" value = '{{t}}'><i class="fa fa-tag" aria-hidden="true"></i> {{t}}</button>
+                  {% endfor %}
+               </div>
+               
+            </div>
+            <div id="add-temp-tag" class="add-tag-form col-lg-4">
+               <img src="/static/wowardrobe/img/temp_legend.JPG" height="70%" />
+            </div>
+         </div>
+         <hr>
+         <div class = "wtagit-form" style="text-align:center;">
+            <input type="submit" class="btn btn-info" value="Save">
+            <input id = "reset-form" type="reset"  class="btn btn-default" value="Reset">
+        </div>
+		{% csrf_token %}
+      </form>
+   </div>
+</div>
+<!-- /.container -->
+{% endblock %}
