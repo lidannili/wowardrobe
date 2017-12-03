@@ -597,7 +597,7 @@ def register(request):
 
     token = default_token_generator.make_token(new_user)
     email_body = """
-	Welcome to Grumblr. Please click the link below to
+	Welcome to WoWardrobe. Please click the link below to
 	verify your email address and complete the registration of your account:
 	http://%s%s""" % (request.get_host(),
                       reverse('confirm', args=(new_user.username, token)))
