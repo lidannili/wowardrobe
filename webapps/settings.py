@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import configparser
 config = configparser.ConfigParser()
-config.read('/home/ubuntu/config.ini')
+config.read('/home/ubuntu/wowardrobe/config.ini')
 # config.read('config.ini')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,7 +28,7 @@ PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__)) + '/'
 SECRET_KEY = config.get('secrets','SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = ['34.208.158.105']
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'wowardrobe',
+    'storages',	
 ]
 
 MIDDLEWARE = [
