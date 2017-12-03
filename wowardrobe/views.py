@@ -1167,12 +1167,16 @@ def expand_wardrobe(request):
 def get_top_n_brand(n, user):
     brands = Tags.objects.filter(type='brand', user=user).values('tagname').annotate(count=Count('id')).order_by('-count')[
              :n].values_list('tagname', flat=True)
+    if len(brands) == 0:
+        return CONSTANT_BRAND
     return list(brands)
 
 
 def get_top_n_color(n, user):
     colors = Tags.objects.filter(type='color', user=user).values('tagname').annotate(count=Count('id')).order_by('-count')[
              :n].values_list('tagname', flat=True)
+    if len(colors) == 0:
+        return CONSTANT_COLORS
     return list(colors)
 
 
